@@ -15,16 +15,10 @@ export default function Topic() {
   const { data: session } = useSession();
   const [tab, setTab] = useState(tabs[0]);
   return (
-    <div className="w-full h-full overflow-y-auto overflow-x-hidden">
-      <Navbar />
-      {/* <h1>Vectors</h1>
-      <p>Hi {session?.user?.email}</p> */}
-      {/* {JSON.stringify(session)} */}
-      <TopicWrapper>
-        <Tabs onChange={setTab} tabs={tabs} value={tab} />
-        <Vectors />
-      </TopicWrapper>
-    </div>
+    <TopicWrapper>
+      <Tabs onChange={setTab} tabs={tabs} value={tab} />
+      <Vectors />
+    </TopicWrapper>
   );
 }
 
@@ -33,10 +27,11 @@ function Vectors() {
   const length2 = "|\\overrightarrow{a}| = \\sqrt{x^2 + y^2 + z^2}";
   const add1 = "\\overrightarrow{AB} = \\overrightarrow{OB} - \\overrightarrow{OA}";
   const unit1 = "\\text{\\^{a}} = \\text{\\(\\frac a {|a|} \\)}";
-  const scalar1 = "\\text{a} \\sdot \\text{b} = \\text{b} \\sdot \\text{a}"
-  const scalar2 = "\\text{a} \\sdot (\\text{b} \\plusmn \\text{c}) = \\text{a} \\sdot \\text{b} \\plusmn \\text{a} \\sdot \\text{c}"
-  const scalar3 = ""
-  const scalar4 = ""
+  const scalar1 = "\\text{a} \\sdot \\text{b} = \\text{b} \\sdot \\text{a}";
+  const scalar2 =
+    "\\text{a} \\sdot (\\text{b} \\plusmn \\text{c}) = \\text{a} \\sdot \\text{b} \\plusmn \\text{a} \\sdot \\text{c}";
+  const scalar3 = "";
+  const scalar4 = "";
   return (
     <div>
       <h3 className="text-xl m-3 font-bold">Length of vector</h3>
@@ -54,7 +49,6 @@ function Vectors() {
       <BlockMath>{scalar2}</BlockMath>
       <BlockMath>{scalar3}</BlockMath>
       <BlockMath>{scalar4}</BlockMath>
-
     </div>
   );
 }
