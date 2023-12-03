@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.className} h-screen w-screen overflow-y-auto`}>
         <ToastComponent />
         <Provider>
-          <div className="w-full h-auto overflow-y-auto overflow-x-hidden">
+          <div className="w-full h-full overflow-y-auto overflow-x-hidden flex flex-col">
             <Navbar />
             {children}
           </div>
