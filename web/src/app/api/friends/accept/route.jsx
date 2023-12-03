@@ -1,4 +1,3 @@
-import { addFriendValidator } from "@/libs/validations/add-friend";
 import prisma from "@/libs/prismadb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
@@ -22,7 +21,7 @@ export async function POST(req) {
     }
 
     // Branch: Already Accepted
-    if ((check.status = "accepted")) {
+    if (check.status == "accepted") {
       return new NextResponse("Already Accepted", { status: 200 });
     }
 

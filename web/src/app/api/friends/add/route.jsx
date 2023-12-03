@@ -23,8 +23,6 @@ export async function POST(req) {
 
     const session = await getServerSession(authOptions);
 
-    console.log(session, "Session");
-
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
@@ -46,6 +44,29 @@ export async function POST(req) {
 
     if (currentFriendship?.status == "accepted") {
       return new NextResponse("You are already friends!", { status: 400 });
+    }
+
+    // Check if user already has a request
+    const existingFriendship = await prisma.friendship.findUnique({
+      where: {
+        fromUserId_toUserId: { fromUserId: idToAdd, toUserId: session.user.id}
+      }
+    })
+
+    if (existingFriendship?.status == "accepted"){
+      return new NextResponse("You are already friends!", {status:400})
+    }
+
+    if (existingFriendship?.status == "pending"){
+      await prisma.friendship.update({
+        where:{
+          fromUserId_toUserId: { fromUserId: idToAdd, toUserId: session.user.id}
+        }, data:{
+          status:"accepted"
+        }
+      })
+
+      return new NextResponse("Friend request accepted!", {status:200})
     }
 
     // Valid Request
